@@ -3,168 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lapabi.AI - Login & Signup</title>
+    <title>Lapabi.AI - Studio</title>
     <style>
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; transition: 0.3s; }
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            /* உங்கள் Lapabi.Ai படம் இங்கே லிங்காக மாற்றப்பட்டுள்ளது */
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), 
+            margin: 0; padding: 0; font-family: 'Inter', sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), 
                         url('https://i.postimg.cc/85Mh8tRL/1769144100668.png'); 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            background-size: cover; background-position: center; background-attachment: fixed;
+            height: 100vh; display: flex; align-items: center; justify-content: center; color: white;
         }
 
-        .auth-card {
-            background: rgba(15, 23, 42, 0.7);
-            padding: 40px;
-            border-radius: 28px;
-            width: 380px;
-            text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            animation: fadeIn 0.8s ease-out;
+        .container {
+            background: rgba(15, 23, 42, 0.8); padding: 30px; border-radius: 24px;
+            width: 90%; max-width: 400px; text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(15px);
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        h2 { color: #fff; margin-bottom: 10px; font-size: 28px; letter-spacing: -0.5px; }
-        p { color: #94a3b8; font-size: 14px; margin-bottom: 30px; }
-
-        .field { text-align: left; margin-bottom: 20px; }
-        label { color: #e2e8f0; font-size: 13px; font-weight: 500; margin-left: 4px; display: block; margin-bottom: 6px; }
-        
-        input {
-            width: 100%;
-            padding: 14px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px;
-            color: white;
-            outline: none;
-            font-size: 15px;
-            transition: all 0.3s;
+        input, textarea {
+            width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3); color: white; outline: none;
         }
 
-        input:focus { border-color: #3b82f6; background: rgba(255, 255, 255, 0.1); }
-
-        .main-btn {
-            width: 100%;
-            padding: 16px;
-            background: #3b82f6;
-            color: white;
-            border: none;
-            border-radius: 14px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: 0.3s;
+        .btn {
+            width: 100%; padding: 15px; background: #3b82f6; border: none;
+            border-radius: 12px; color: white; font-weight: bold; cursor: pointer;
         }
 
-        .main-btn:hover { background: #2563eb; transform: scale(1.02); }
+        .btn:hover { background: #2563eb; transform: scale(1.02); }
 
-        .footer-link { color: #94a3b8; font-size: 14px; margin-top: 25px; cursor: pointer; }
-        .footer-link span { color: #3b82f6; font-weight: 600; }
+        #image-result {
+            width: 100%; min-height: 200px; margin-top: 20px; border-radius: 15px;
+            border: 2px dashed #3b82f6; display: flex; align-items: center; justify-content: center; overflow: hidden;
+        }
 
         .hidden { display: none; }
-
-        .code-input {
-            text-align: center;
-            letter-spacing: 12px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #3b82f6;
+        .timer-text { color: #3b82f6; font-weight: bold; margin-top: 10px; }
+        
+        /* Ad Space Styling */
+        .ad-box {
+            margin-top: 20px; padding: 10px; background: rgba(255,255,255,0.05);
+            border-radius: 10px; font-size: 12px; color: #64748b;
         }
     </style>
 </head>
 <body>
 
-    <div class="auth-card" id="form-container">
-        <h2 id="title">Get Started</h2>
-        <p id="subtitle">Unlock your creativity with Lapabi.AI</p>
-
-        <div class="field" id="user-div">
-            <label>Username</label>
-            <input type="text" id="uname" placeholder="Choose a name">
-        </div>
-
-        <div class="field">
-            <label>Email Address</label>
-            <input type="email" id="uemail" placeholder="example@mail.com">
-        </div>
-
-        <div class="field">
-            <label>Password</label>
-            <input type="password" id="upass" placeholder="••••••••">
-        </div>
-
-        <button class="main-btn" onclick="handleAuth()" id="action-btn">Sign Up</button>
-
-        <div class="footer-link" onclick="toggleMode()" id="toggle-ui">
-            Already have an account? <span>Login</span>
-        </div>
+    <div id="auth-page" class="container">
+        <h2>Lapabi.AI</h2>
+        <p>Login to start creating</p>
+        <input type="email" id="email" placeholder="Email Address">
+        <input type="password" id="pass" placeholder="Password">
+        <button class="btn" onclick="showStudio()">Login</button>
     </div>
 
-    <div class="auth-card hidden" id="verify-container">
-        <h2>Verify Account</h2>
-        <p>Enter the code sent to your email to continue.</p>
+    <div id="studio-page" class="container hidden">
+        <h3>AI Studio</h3>
+        <textarea id="prompt" placeholder="Describe your image... (e.g. Robot in forest)"></textarea>
+        <button class="btn" onclick="generateAI()">✨ Generate with Lapabi.AI</button>
         
-        <div class="field">
-            <input type="number" id="otp" class="code-input" placeholder="000000" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6);">
+        <div id="timer-area" class="hidden">
+            <p class="timer-text">Lapabi.Ai is ready in <span id="sec">0</span>s</p>
         </div>
 
-        <button class="main-btn" onclick="completeVerify()">Verify & Enter Studio</button>
-        
-        <div class="footer-link" onclick="location.reload()">
-            <span>Edit Email Address</span>
+        <div id="image-result">
+            <p id="placeholder-text">Your masterpiece will appear here</p>
         </div>
+
+        <div class="ad-box">
+            Advertisement Space
+            </div>
     </div>
 
     <script>
-        let isLoginMode = false;
-
-        function toggleMode() {
-            isLoginMode = !isLoginMode;
-            document.getElementById('title').innerText = isLoginMode ? "Welcome Back" : "Get Started";
-            document.getElementById('subtitle').innerText = isLoginMode ? "Login to Lapabi.AI Studio" : "Unlock your creativity with Lapabi.AI";
-            document.getElementById('user-div').classList.toggle('hidden');
-            document.getElementById('action-btn').innerText = isLoginMode ? "Login" : "Sign Up";
-            document.getElementById('toggle-ui').innerHTML = isLoginMode ? "New here? <span>Create Account</span>" : "Already have an account? <span>Login</span>";
+        function showStudio() {
+            const e = document.getElementById('email').value;
+            const p = document.getElementById('pass').value;
+            if(e && p) {
+                document.getElementById('auth-page').classList.add('hidden');
+                document.getElementById('studio-page').classList.remove('hidden');
+            } else { alert("Please login first!"); }
         }
 
-        function handleAuth() {
-            const email = document.getElementById('uemail').value;
-            const pass = document.getElementById('upass').value;
+        let timer;
+        function generateAI() {
+            const text = document.getElementById('prompt').value;
+            if(!text) return alert("Write something!");
 
-            if(!email || !pass) { alert("Please fill all fields!"); return; }
+            const resultDiv = document.getElementById('image-result');
+            const timerArea = document.getElementById('timer-area');
+            const secSpan = document.getElementById('sec');
 
-            if(isLoginMode) {
-                alert("Logging in to Lapabi.AI...");
-            } else {
-                document.getElementById('form-container').classList.add('hidden');
-                document.getElementById('verify-container').classList.remove('hidden');
-            }
-        }
+            // Reset UI
+            resultDiv.innerHTML = "<p>Creating...</p>";
+            timerArea.classList.remove('hidden');
+            
+            let s = 0;
+            secSpan.innerText = s;
+            clearInterval(timer);
+            timer = setInterval(() => { s++; secSpan.innerText = s; }, 1000);
 
-        function completeVerify() {
-            const code = document.getElementById('otp').value;
-            if(code === "123456") {
-                alert("Success! Welcome to Lapabi.AI Studio.");
-            } else {
-                alert("Incorrect code. For testing use 123456");
-            }
+            // API Calling
+            const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(text)}?width=1024&height=1024&nologo=true&seed=${Math.random()}`;
+            
+            const img = new Image();
+            img.src = url;
+            img.style.width = "100%";
+            img.onload = () => {
+                clearInterval(timer);
+                timerArea.classList.add('hidden');
+                resultDiv.innerHTML = "";
+                resultDiv.appendChild(img);
+            };
         }
     </script>
 </body>
-  </html>
-
+</html>
