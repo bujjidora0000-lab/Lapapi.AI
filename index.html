@@ -69,9 +69,32 @@
             cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        /* Purchase Cards */
-        .plan-card { background: white; border: 1px solid #ddd; padding: 20px; border-radius: 15px; margin-bottom: 15px; text-align: left; }
-        .plan-card.highlight { border: 2px solid #FF69B4; background: #fffaff; }
+        /* Premium Subscription Cards */
+        .plan-card {
+            background: white; border-radius: 20px; padding: 25px; margin-bottom: 25px;
+            text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #eee;
+        }
+        
+        /* Silver Plan for Monthly ($23) */
+        .silver-plan {
+            background: linear-gradient(145deg, #e6e6e6, #ffffff, #cfcfcf);
+            border: 2px solid #b0b0b0;
+        }
+
+        /* Gold Plan for Yearly ($237) */
+        .gold-plan {
+            background: linear-gradient(145deg, #fff9e6, #ffffff, #f7e08b);
+            border: 2px solid #d4af37;
+        }
+
+        .plan-title { font-size: 22px; font-weight: 800; margin-bottom: 10px; color: #222; }
+        .plan-price { font-size: 20px; font-weight: bold; color: #000; margin-top: 10px; }
+
+        .buy-now-btn {
+            width: 100%; padding: 12px; background: #000; color: #fff; border: none;
+            border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px;
+        }
+        .buy-now-btn:hover { background: #FF1493; }
 
         .hidden { display: none; }
     </style>
@@ -85,19 +108,19 @@
 
     <nav class="sidebar" id="sidebar-menu">
         <div style="text-align: right; font-size: 30px; cursor: pointer;" onclick="toggleMenu()">×</div>
-        <li class="sidebar-item" onclick="showView('main-page')">• Main Page</li>
+        <li class="sidebar-item" onclick="showView('main-page')">• AI Studio</li>
         <li class="sidebar-item" onclick="showView('profile-page')">• Profile</li>
-        <li class="sidebar-item" onclick="showView('purchase-page')">• Purchase (Plans)</li>
-        <li class="sidebar-item" onclick="showView('payment-page')">• Payment</li>
+        <li class="sidebar-item" onclick="showView('purchase-page')">• Subscription Plans</li>
+        <li class="sidebar-item" onclick="showView('payment-page')">• Payment Status</li>
         <li class="sidebar-item" onclick="showView('settings-page')">• Settings</li>
     </nav>
 
     <div id="main-page" class="view-section active">
-        <h2>Welcome to Lapabi.AI</h2>
+        <h2>AI Art Studio</h2>
         <div class="golden-frame">
             <p id="placeholder-text">Your masterpiece will appear here</p>
             <div id="loader-area" class="hidden">
-                <p>Watching Ad... Image is generating</p>
+                <p>Generating Image...</p>
                 <div class="timer-display"><span id="timer-count">0</span>s</div>
             </div>
             <img id="generated-img">
@@ -111,40 +134,44 @@
             <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style="width:100px; border-radius:50%; border:2px solid #FF69B4;">
             <h3>User Profile</h3>
             <p><strong>Username:</strong> User_99</p>
-            <p><strong>Status:</strong> Verified Artist</p>
-            <p><strong>DOB:</strong> 01/01/2000</p>
-            <button class="gen-btn" onclick="showView('main-page')">Back to Home</button>
+            <p><strong>Tier:</strong> Free User</p>
+            <button class="gen-btn" onclick="showView('purchase-page')">Upgrade Plan</button>
         </div>
     </div>
 
     <div id="purchase-page" class="view-section">
-        <h3>Subscription Plans</h3>
+        <h3>Upgrade Your Experience</h3>
+        
         <div class="plan-card">
-            <h4>Free Plan</h4>
+            <div class="plan-title">Free Plan</div>
             <p>• 5 Credits / Day</p>
-            <p>• With Advertisements</p>
-            <strong>Price: $0</strong>
+            <p>• Supported by Ads</p>
+            <div class="plan-price">Price: $0</div>
         </div>
-        <div class="plan-card highlight">
-            <h4>Monthly Plan</h4>
+
+        <div class="plan-card silver-plan">
+            <div class="plan-title">Monthly Plan 🥈</div>
             <p>• 17 Credits / Day</p>
-            <p>• Without Advertisements</p>
-            <strong>Price: $13</strong>
+            <p>• Ad-Free Experience</p>
+            <div class="plan-price">Price: $23</div>
+            <button class="buy-now-btn" onclick="window.location.href='https://link.payoneer.com/Token?t=A0EC2C74E97F42168AF2AE00121FFD6D&src=tpl'">Buy Plan</button>
         </div>
-        <div class="plan-card">
-            <h4>Yearly Plan</h4>
+
+        <div class="plan-card gold-plan">
+            <div class="plan-title" style="color: #856404;">Yearly Plan 🥇</div>
             <p>• 37 Credits / Day</p>
-            <p>• Without Advertisements</p>
-            <strong>Price: $237</strong>
+            <p>• Priority Processing</p>
+            <div class="plan-price" style="color: #856404;">Price: $237</div>
+            <button class="buy-now-btn" onclick="alert('Yearly payment link is being processed!')">Buy Plan</button>
         </div>
     </div>
 
     <div id="payment-page" class="view-section">
         <div style="background:white; padding:30px; border-radius:20px;">
-            <h3>Select Payment Method</h3>
+            <h3>Payment Status</h3>
             <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Payoneer_logo.svg" style="width:150px; margin:20px 0;">
-            <p>Payoneer Gateway Available</p>
-            <button class="gen-btn">Connect Payoneer</button>
+            <p>Once you complete the payment on Payoneer, your credits will be updated automatically.</p>
+            <button class="gen-btn" onclick="showView('main-page')">Return to Studio</button>
         </div>
     </div>
 
@@ -162,7 +189,9 @@
         function toggleMenu() { document.getElementById('sidebar-menu').classList.toggle('active'); }
 
         function showView(viewId) {
-            toggleMenu();
+            if (document.getElementById('sidebar-menu').classList.contains('active')) {
+                toggleMenu();
+            }
             document.querySelectorAll('.view-section').forEach(section => section.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
         }
@@ -207,5 +236,4 @@
         }
     </script>
 </body>
-    </html>
-    
+</html>
