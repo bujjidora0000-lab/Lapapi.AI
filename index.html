@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lapabi.AI - Login & Signup</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            /* உங்கள் Lapabi.Ai படம் இங்கே லிங்காக மாற்றப்பட்டுள்ளது */
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), 
+                        url('https://i.postimg.cc/85Mh8tRL/1769144100668.png'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .auth-card {
+            background: rgba(15, 23, 42, 0.7);
+            padding: 40px;
+            border-radius: 28px;
+            width: 380px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2 { color: #fff; margin-bottom: 10px; font-size: 28px; letter-spacing: -0.5px; }
+        p { color: #94a3b8; font-size: 14px; margin-bottom: 30px; }
+
+        .field { text-align: left; margin-bottom: 20px; }
+        label { color: #e2e8f0; font-size: 13px; font-weight: 500; margin-left: 4px; display: block; margin-bottom: 6px; }
+        
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            color: white;
+            outline: none;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        input:focus { border-color: #3b82f6; background: rgba(255, 255, 255, 0.1); }
+
+        .main-btn {
+            width: 100%;
+            padding: 16px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .main-btn:hover { background: #2563eb; transform: scale(1.02); }
+
+        .footer-link { color: #94a3b8; font-size: 14px; margin-top: 25px; cursor: pointer; }
+        .footer-link span { color: #3b82f6; font-weight: 600; }
+
+        .hidden { display: none; }
+
+        .code-input {
+            text-align: center;
+            letter-spacing: 12px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-card" id="form-container">
+        <h2 id="title">Get Started</h2>
+        <p id="subtitle">Unlock your creativity with Lapabi.AI</p>
+
+        <div class="field" id="user-div">
+            <label>Username</label>
+            <input type="text" id="uname" placeholder="Choose a name">
+        </div>
+
+        <div class="field">
+            <label>Email Address</label>
+            <input type="email" id="uemail" placeholder="example@mail.com">
+        </div>
+
+        <div class="field">
+            <label>Password</label>
+            <input type="password" id="upass" placeholder="••••••••">
+        </div>
+
+        <button class="main-btn" onclick="handleAuth()" id="action-btn">Sign Up</button>
+
+        <div class="footer-link" onclick="toggleMode()" id="toggle-ui">
+            Already have an account? <span>Login</span>
+        </div>
+    </div>
+
+    <div class="auth-card hidden" id="verify-container">
+        <h2>Verify Account</h2>
+        <p>Enter the code sent to your email to continue.</p>
+        
+        <div class="field">
+            <input type="number" id="otp" class="code-input" placeholder="000000" oninput="if(this.value.length > 6) this.value = this.value.slice(0,6);">
+        </div>
+
+        <button class="main-btn" onclick="completeVerify()">Verify & Enter Studio</button>
+        
+        <div class="footer-link" onclick="location.reload()">
+            <span>Edit Email Address</span>
+        </div>
+    </div>
+
+    <script>
+        let isLoginMode = false;
+
+        function toggleMode() {
+            isLoginMode = !isLoginMode;
+            document.getElementById('title').innerText = isLoginMode ? "Welcome Back" : "Get Started";
+            document.getElementById('subtitle').innerText = isLoginMode ? "Login to Lapabi.AI Studio" : "Unlock your creativity with Lapabi.AI";
+            document.getElementById('user-div').classList.toggle('hidden');
+            document.getElementById('action-btn').innerText = isLoginMode ? "Login" : "Sign Up";
+            document.getElementById('toggle-ui').innerHTML = isLoginMode ? "New here? <span>Create Account</span>" : "Already have an account? <span>Login</span>";
+        }
+
+        function handleAuth() {
+            const email = document.getElementById('uemail').value;
+            const pass = document.getElementById('upass').value;
+
+            if(!email || !pass) { alert("Please fill all fields!"); return; }
+
+            if(isLoginMode) {
+                alert("Logging in to Lapabi.AI...");
+            } else {
+                document.getElementById('form-container').classList.add('hidden');
+                document.getElementById('verify-container').classList.remove('hidden');
+            }
+        }
+
+        function completeVerify() {
+            const code = document.getElementById('otp').value;
+            if(code === "123456") {
+                alert("Success! Welcome to Lapabi.AI Studio.");
+            } else {
+                alert("Incorrect code. For testing use 123456");
+            }
+        }
+    </script>
+</body>
+  </html>
+
