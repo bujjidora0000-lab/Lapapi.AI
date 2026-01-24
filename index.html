@@ -3,217 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lapabi.AI - Welcome</title>
-    <style>
-        * { box-sizing: border-box; transition: 0.3s; }
-        
-        body {
-            margin: 0; padding: 0; font-family: 'Inter', sans-serif;
-            /* நீங்கள் கேட்ட Light Pink, Parrot Green, Orange வண்ணங்கள் */
-            background: linear-gradient(135deg, #FFD1DC, #E2F0CB, #FFDAB9);
-            background-attachment: fixed;
-            height: 100vh; display: flex; align-items: center; justify-content: center;
-            overflow: hidden;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.95); /* தெளிவான வெள்ளை பின்னணி */
-            padding: 35px; border-radius: 28px;
-            width: 90%; max-width: 380px; text-align: center;
-            border: 2px solid #fff;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-        }
-
-        /* எழுத்துக்கள் தெளிவாக தெரிய கருப்பு நிறம் */
-        h2 { color: #222; font-size: 28px; margin-bottom: 8px; }
-        p { color: #555; font-size: 14px; margin-bottom: 25px; font-weight: 500; }
-
-        /* Input Boxes - Clear & Readable */
-        input, textarea {
-            width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 12px;
-            border: 2px solid #eee; background: #fff; 
-            color: #000; font-size: 16px; outline: none; font-weight: 500;
-        }
-
-        input:focus { border-color: #FF69B4; }
-
-        .btn {
-            width: 100%; padding: 16px; background: #FF8C00; /* Orange */
-            border: none; border-radius: 12px; color: white;
-            font-weight: bold; font-size: 17px; cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.2);
-        }
-
-        .btn:hover { background: #e67e00; transform: translateY(-2px); }
-
-        /* Profile Picture Style */
-        .profile-pic-wrapper {
-            position: relative; width: 100px; height: 100px; margin: 0 auto 20px;
-        }
-
-        #display-pic {
-            width: 100%; height: 100%; border-radius: 50%;
-            border: 3px solid #FFD1DC; object-fit: cover;
-        }
-
-        .upload-badge {
-            position: absolute; bottom: 5px; right: 5px;
-            background: #FF69B4; color: white; width: 28px; height: 28px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; font-size: 18px; border: 2px solid #fff;
-        }
-
-        .hidden { display: none; }
-        .label-left { text-align: left; display: block; margin: 0 0 5px 5px; color: #444; font-size: 13px; font-weight: bold; }
-    </style>
-</head>
-<body>
-
-    <div id="login-section" class="container">
-        <h2>Lapabi.AI</h2>
-        <p>Unlock your creativity</p>
-        <input type="email" id="email" placeholder="Email Address">
-        <input type="password" id="pass" placeholder="Password">
-        <button class="btn" onclick="showProfile()">Login</button>
-    </div>
-
-    <div id="profile-section" class="container hidden">
-        <h2>Set Up Profile</h2>
-        <p>Tell us about yourself</p>
-
-        <div class="profile-pic-wrapper">
-            <img id="display-pic" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
-            <input type="file" id="file-input" hidden accept="image/*" onchange="previewImg(event)">
-            <div class="upload-badge" onclick="document.getElementById('file-input').click()">+</div>
-        </div>
-
-        <input type="text" id="username" placeholder="Choose Username">
-        <input type="number" id="v-code" placeholder="Verification Code (123456)">
-        <textarea id="about" placeholder="About you (AI Enthusiast)" rows="2"></textarea>
-        
-        <label class="label-left">Date of Birth (Optional)</label>
-        <input type="date" id="dob">
-
-        <button class="btn" onclick="finishSetup()">Finish & Go to Studio</button>
-    </div>
-
-    <script>
-        // Go to Profile Page
-        function showProfile() {
-            const e = document.getElementById('email').value;
-            const p = document.getElementById('pass').value;
-            if(e && p) {
-                document.getElementById('login-section').classList.add('hidden');
-                document.getElementById('profile-section').classList.remove('hidden');
-            } else {
-                alert("Please enter login details!");
-            }
-        }
-
-        // Image Preview
-        function previewImg(event) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                document.getElementById('display-pic').src = reader.result;
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        }
-
-        // Finish Setup
-        function finishSetup() {
-            const user = document.getElementById('username').value;
-            const code = document.getElementById('v-code').value;
-
-            if(!user) { alert("Please enter a username!"); return; }
-            
-            if(code === "123456") {
-                alert("Profile created! Welcome, " + user);
-                // இங்கு மெயின் ஸ்டுடியோ பக்கத்தை இணைப்போம்
-            } else {
-                alert("Invalid Verification Code!");
-            }
-        }
-    </script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="ta">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lapabi.AI - முதன்மைப் பக்கம்</title>
+    <title>Lapabi.AI - Studio</title>
     <style>
         * { box-sizing: border-box; transition: 0.3s; font-family: 'Poppins', sans-serif; }
         
         body {
             margin: 0; padding: 0;
             background: linear-gradient(135deg, #FFD1DC, #FFDAB9);
-            min-height: 100vh; color: #333;
+            min-height: 100vh; color: #333; overflow-x: hidden;
         }
 
-        /* தலைப்புப் பகுதி */
+        /* Top Navigation */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 15px 20px; background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
         }
 
         .profile-icon {
             width: 45px; height: 45px; border-radius: 50%;
-            border: 2px solid #FF69B4; cursor: pointer;
+            border: 2px solid #FF69B4; cursor: pointer; object-fit: cover;
         }
 
-        .menu-btn { font-size: 30px; cursor: pointer; }
+        .menu-btn { font-size: 30px; cursor: pointer; color: #333; }
 
-        /* பக்கவாட்டு மெனு */
+        /* Sidebar Menu */
         .sidebar {
             position: fixed; right: -300px; top: 0; width: 280px; height: 100%;
-            background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            padding: 20px; z-index: 200; overflow-y: auto;
+            background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            padding: 20px; z-index: 2000; transition: 0.4s;
         }
         .sidebar.active { right: 0; }
         .sidebar-item {
-            padding: 15px; border-bottom: 1px solid #eee; cursor: pointer;
-            font-weight: 600; list-style: none;
+            padding: 18px; border-bottom: 1px solid #eee; cursor: pointer;
+            font-weight: 600; list-style: none; color: #444; font-size: 15px;
         }
         .sidebar-item:hover { background: #fff5f8; color: #FF69B4; }
 
-        /* முதன்மை உள்ளடக்கம் */
+        /* Content Area */
         .main-content { text-align: center; padding: 20px; }
-        h1 { font-size: 24px; margin-bottom: 20px; }
+        h1 { font-size: 26px; margin-bottom: 20px; color: #222; font-weight: 700; }
 
-        /* ராயல் கோல்டன் பிரேம் */
-        .golden-frame {
-            width: 95%; max-width: 600px; min-height: 400px; margin: 0 auto;
-            border: 15px solid;
+        /* Royal Golden Frame */
+        .royal-frame {
+            width: 95%; max-width: 550px; min-height: 400px; margin: 0 auto;
+            border: 12px solid;
             border-image: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c) 1;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            background: white; display: flex; align-items: center; justify-content: center;
-            flex-direction: column; position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            background: #fff; display: flex; align-items: center; justify-content: center;
+            flex-direction: column; position: relative; overflow: hidden;
         }
 
-        #output-image { width: 100%; display: none; }
-        .timer { font-size: 24px; font-weight: bold; color: #b38728; }
+        #output-image { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .loader-box { padding: 20px; }
+        .timer-text { font-size: 24px; font-weight: bold; color: #b38728; margin-top: 10px; }
 
-        /* பிராம்ட் பாக்ஸ் (Dark Pink) */
-        .prompt-container { margin-top: 25px; width: 95%; max-width: 600px; margin-left: auto; margin-right: auto; }
+        /* Dark Pink Prompt Box */
+        .prompt-container { margin: 30px auto; width: 95%; max-width: 550px; }
         #user-prompt {
-            width: 100%; padding: 15px; border-radius: 15px; border: none;
+            width: 100%; padding: 18px; border-radius: 15px; border: none;
             background: #FF1493; color: black; font-weight: bold; font-size: 16px;
-            outline: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            outline: none; box-shadow: 0 5px 15px rgba(255, 20, 147, 0.2);
         }
 
-        .action-btn {
-            margin-top: 15px; padding: 15px 30px; background: #333; color: white;
-            border: none; border-radius: 10px; font-weight: bold; cursor: pointer;
+        .generate-btn {
+            margin-top: 15px; padding: 15px 40px; background: #222; color: white;
+            border: none; border-radius: 12px; font-weight: bold; cursor: pointer; width: 100%;
         }
 
-        /* டவுன்லோட் ஐகான் */
         .download-btn {
-            margin-top: 10px; display: none; cursor: pointer;
-            background: #fff; padding: 10px; border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            margin-top: 15px; display: none; cursor: pointer;
+            background: white; padding: 10px 20px; border-radius: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-weight: bold;
+            text-decoration: none; color: #333; border: 1px solid #ddd;
         }
 
         .hidden { display: none; }
@@ -222,64 +84,62 @@
 <body>
 
     <header>
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="profile-icon" onclick="openProfileTab()">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="profile-icon" onclick="openProfile()">
         <div class="menu-btn" onclick="toggleMenu()">☰</div>
     </header>
 
     <nav class="sidebar" id="sidebar">
-        <div style="text-align: right; font-size: 25px; cursor: pointer;" onclick="toggleMenu()">✖</div>
-        <li class="sidebar-item" onclick="toggleMenu()">• முதன்மைப் பக்கம் (Main Page)</li>
-        <li class="sidebar-item" onclick="openProfileTab()">• சுயவிவரம் (Profile)</li>
-        <li class="sidebar-item" onclick="showPlans()">• சந்தா திட்டங்கள் (Purchase)</li>
-        <li class="sidebar-item" onclick="showPayment()">• பணம் செலுத்துதல் (Payment)</li>
-        <li class="sidebar-item" onclick="showSettings()">• அமைப்புகள் (Settings)</li>
+        <div style="text-align: right; font-size: 28px; cursor: pointer;" onclick="toggleMenu()">×</div>
+        <li class="sidebar-item" onclick="toggleMenu()">• Main Page</li>
+        <li class="sidebar-item" onclick="openProfile()">• Profile</li>
+        <li class="sidebar-item" onclick="showPlans()">• Purchase (Plans)</li>
+        <li class="sidebar-item" onclick="showPayment()">• Payment (Payoneer)</li>
+        <li class="sidebar-item" onclick="showSettings()">• Settings</li>
     </nav>
 
     <div class="main-content">
         <h1>Welcome to Lapabi.AI</h1>
 
-        <div class="golden-frame" id="frame">
-            <p id="placeholder">உங்கள் கற்பனை இங்கே உருவாகும்...</p>
-            <div id="loader" class="hidden">
-                <p>விளம்பரம் பார்க்கப்படுகிறது... அதன் பின் படம் உருவாகும்</p>
-                <div class="timer"><span id="count">0</span>s</div>
+        <div class="royal-frame" id="frame">
+            <p id="placeholder">Your Masterpiece Appear Here</p>
+            
+            <div id="loader" class="hidden loader-box">
+                <p>Watching Ad... Processing Image</p>
+                <div class="timer-text"><span id="count">0</span>s</div>
             </div>
+
             <img id="output-image">
-            <a id="download-link" download="Lapabi_AI_Image.png">
-                <div class="download-btn" id="dl-icon">📥 பதிவிறக்கு</div>
-            </a>
+            <a id="download-link" download="Lapabi_AI_Art.png" class="download-btn">📥 Download Art</a>
         </div>
 
         <div class="prompt-container">
-            <textarea id="user-prompt" rows="3" placeholder="உங்களுக்கு என்ன படம் வேண்டும் என்று இங்கே எழுதவும்..."></textarea>
-            <button class="action-btn" onclick="startGeneration()">✨ படத்தை உருவாக்கு</button>
+            <textarea id="user-prompt" rows="3" placeholder="Describe your imagination in detail..."></textarea>
+            <button class="generate-btn" onclick="startProcess()">✨ Generate Image</button>
         </div>
     </div>
 
     <script>
         function toggleMenu() { document.getElementById('sidebar').classList.toggle('active'); }
 
-        // படம் உருவாக்கும் முறை
-        function startGeneration() {
+        function startProcess() {
             const prompt = document.getElementById('user-prompt').value;
-            if(!prompt) return alert("தயவுசெய்து ஏதாவது எழுதவும்!");
+            if(!prompt) return alert("Please type something to generate!");
 
             const loader = document.getElementById('loader');
             const placeholder = document.getElementById('placeholder');
             const output = document.getElementById('output-image');
-            const dlIcon = document.getElementById('dl-icon');
+            const dlBtn = document.querySelector('.download-btn');
 
-            // ஆரம்ப நிலை
             placeholder.classList.add('hidden');
             loader.classList.remove('hidden');
             output.style.display = 'none';
-            dlIcon.style.display = 'none';
+            dlBtn.style.display = 'none';
 
             let s = 0;
             const timer = setInterval(() => {
                 s++;
                 document.getElementById('count').innerText = s;
-                if(s === 5) { // 5 வினாடி விளம்பர நேரம் என வைத்துக்கொள்வோம்
+                if(s === 3) { // 3 Sec Ad Timer
                     clearInterval(timer);
                     generateImage(prompt);
                 }
@@ -287,7 +147,7 @@
         }
 
         function generateImage(prompt) {
-            const seed = Math.floor(Math.random() * 99999);
+            const seed = Math.floor(Math.random() * 100000);
             const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&nologo=true&seed=${seed}`;
             
             const img = new Image();
@@ -297,32 +157,29 @@
                 const out = document.getElementById('output-image');
                 out.src = url;
                 out.style.display = 'block';
-                document.getElementById('dl-icon').style.display = 'block';
+                document.querySelector('.download-btn').style.display = 'inline-block';
                 document.getElementById('download-link').href = url;
             };
         }
 
-        // மெனு செயல்பாடுகள்
-        function showPlans() {
-            alert("திட்டங்கள்:\n1. இலவசம்: 5 படங்கள்/நாள் (விளம்பரங்களுடன்)\n2. மாதம்: $13 - 17 படங்கள் (விளம்பரம் இல்லை)\n3. வருடம்: $237 - 37 படங்கள் (விளம்பரம் இல்லை)");
+        function openProfile() {
+            alert("Profile Info:\nUsername: User123\nAbout: AI Artist\nDOB: 01/01/2000");
         }
 
-        function showPayment() { alert("பணம் செலுத்த 'Payoneer' வசதி இணைக்கப்பட்டுள்ளது."); }
+        function showPlans() {
+            alert("PLANS:\n1. Free: 5 Credits (With Ads)\n2. Monthly: $13 (17 Credits, No Ads)\n3. Yearly: $237 (37 Credits, No Ads)");
+        }
+
+        function showPayment() { alert("Payoneer Gateway Selected."); }
 
         function showSettings() {
-            let mode = confirm("இரவு நேரப் பயன்முறையை (Night Mode) மாற்ற வேண்டுமா?");
-            if(mode) document.body.style.background = "#222";
+            let choice = confirm("Switch to Night Mode?");
+            if(choice) document.body.style.background = "#1a1a1a";
             
-            if(confirm("கணக்கை நிரந்தரமாக நீக்க வேண்டுமா?")) {
-                let r = prompt("ஏன் நீக்குகிறீர்கள்? (சிறு ஆய்வு)");
-                if(r) {
-                    alert("சரிபார்ப்புக் குறியீடு மின்னஞ்சலுக்கு அனுப்பப்பட்டது. அதை உள்ளிட்டால் கணக்கு நீக்கப்படும்.");
-                }
+            if(confirm("Delete Account Permanently?")) {
+                let reason = prompt("Why are you deleting? (Survey)");
+                if(reason) alert("Verification code sent to your email.");
             }
-        }
-
-        function openProfileTab() {
-            alert("சுயவிவரம்:\nபெயர்: (Username)\nசுயகுறிப்பு: (About)\nபிறந்த தேதி: (DOB)");
         }
     </script>
 </body>
