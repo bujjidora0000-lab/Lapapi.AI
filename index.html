@@ -7,33 +7,40 @@
     <style>
         * { box-sizing: border-box; transition: 0.3s; font-family: 'Poppins', sans-serif; }
         
-        /* Welcome Background: Red and Dark Green */
+        /* Welcome Background: Red and Dark Green Gradient */
         .welcome-overlay { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(135deg, #8B0000, #004400); 
+            background: linear-gradient(180deg, #8B0000 0%, #004400 100%); 
             z-index: 5000; display: flex; justify-content: center; align-items: center; 
         }
         
         .welcome-card {
-            background: white; padding: 40px; border-radius: 30px;
-            max-width: 420px; width: 90%; text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            background: white; padding: 30px; border-radius: 20px;
+            max-width: 350px; width: 85%; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         /* Logo Styling */
         .welcome-logo {
-            width: 200px; height: auto; margin-bottom: 10px;
+            width: 150px; height: 150px; border-radius: 15px;
+            margin-bottom: 15px; object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .gen-btn { 
-            width: 100%; padding: 18px; background: #222; color: white; 
-            border: none; border-radius: 12px; font-weight: bold; 
-            font-size: 18px; cursor: pointer; margin-top: 15px; 
-        }
+        .welcome-card h1 { color: #222; margin: 10px 0; font-size: 22px; }
+        .welcome-card p { color: #666; font-size: 13px; margin-bottom: 20px; }
 
-        /* Studio Page Background */
-        body { margin: 0; background: #f4f4f4; text-align: center; }
-        .container { padding: 20px; max-width: 600px; margin: 0 auto; }
+        .start-btn { 
+            width: 100%; padding: 15px; background: #222; color: white; 
+            border: none; border-radius: 10px; font-weight: bold; 
+            font-size: 16px; cursor: pointer;
+        }
+        .start-btn:hover { background: #444; }
+
+        /* Studio Page Layout */
+        body { margin: 0; background: #f9f9f9; }
+        .studio-container { padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .ad-slot { width: 100%; max-width: 728px; height: 90px; background: #eee; margin: 15px 0; display: flex; align-items: center; justify-content: center; border: 1px dashed #bbb; font-size: 12px; }
     </style>
 </head>
 <body>
@@ -42,17 +49,18 @@
         <div class="welcome-card">
             <img src="https://i.ibb.co/Xf8R3v90/1769774680684.png" alt="Lapapi.AI" class="welcome-logo">
             
-            <h1 style="color:#222; margin: 10px 0;">Welcome to Lapapi.AI</h1>
-            <p style="color:#666;">The Magic of AI at Your Fingertips</p>
+            <h1>Welcome to Lapapi.AI</h1>
+            <p>The Magic of AI at Your Fingertips</p>
             
-            <button class="gen-btn" onclick="document.getElementById('welcomeScreen').style.display='none'">Start Studio</button>
+            <button class="start-btn" onclick="document.getElementById('welcomeScreen').style.display='none'">Start Studio</button>
         </div>
     </div>
 
-    <div class="container">
-        <h1 style="color:#8B0000;">Lapapi.AI Studio</h1>
-        <p>Your AI generation tool is ready.</p>
-        </div>
+    <div class="studio-container">
+        <div class="ad-slot">Google AdSense Banner</div>
+        <h2 style="color: #004400;">Lapapi.AI Studio</h2>
+        <p>Daily Limit: 37 / 37</p>
+    </div>
 
 </body>
 </html>
