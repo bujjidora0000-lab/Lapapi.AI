@@ -3,108 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lapapi.AI - Magical Studio</title>
+    <title>Lapapi.AI - Neon Magic Studio</title>
     <style>
         * { box-sizing: border-box; transition: 0.3s; font-family: 'Poppins', sans-serif; }
         
-        /* Welcome Screen with Red and Dark Green Gradient */
+        /* Welcome Screen: Dark Pink & Light Parrot Green */
         .welcome-overlay { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(135deg, #8B0000 0%, #004400 100%); 
+            background: linear-gradient(135deg, #FF1493 0%, #ADFF2F 100%); 
             z-index: 5000; display: flex; justify-content: center; align-items: center; 
         }
         
         .welcome-card {
-            background: white; padding: 40px; border-radius: 30px;
-            max-width: 400px; width: 90%; text-align: center;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.6);
+            background: rgba(255, 255, 255, 0.95); padding: 40px; border-radius: 30px;
+            max-width: 450px; width: 90%; text-align: center; box-shadow: 0 15px 45px rgba(0,0,0,0.3);
         }
 
-        /* Logo Styling */
-        .welcome-logo {
-            width: 150px; height: 150px; margin-bottom: 20px;
-            object-fit: contain; border-radius: 20px;
+        /* Unnudaiya Unicorn Logo Styling */
+        .welcome-logo { 
+            width: 100%; max-width: 250px; height: auto; 
+            border-radius: 20px; margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .gen-btn { 
-            width: 100%; padding: 18px; background: #111; color: white; 
-            border: none; border-radius: 15px; font-weight: bold; 
-            font-size: 18px; cursor: pointer; margin-top: 15px; 
+        body { margin: 0; background: #050505; color: #fff; text-align: center; }
+        .neon-title {
+            font-size: 3rem; font-weight: bold; margin: 20px 0;
+            background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff, #ff00ff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .gen-btn:hover { background: #d32f2f; transform: scale(1.02); }
 
-        body { margin: 0; background: #f9f9f9; text-align: center; }
-        .container { padding: 20px; max-width: 650px; margin: 40px auto; }
-        
-        .golden-frame { 
-            width: 100%; min-height: 400px; border: 10px solid; 
-            border-image: linear-gradient(to right, #bf953f, #fcf6ba, #b38728) 1; 
-            background: #fff; margin-bottom: 25px; display: flex; 
-            align-items: center; justify-content: center;
+        .container { padding: 20px; max-width: 700px; margin: 0 auto; min-height: 100vh; }
+
+        .ad-banner {
+            width: 100%; max-width: 728px; height: 90px; background: #1a1a1a;
+            border: 1px solid #333; margin: 15px auto; display: flex;
+            align-items: center; justify-content: center; color: #555; font-size: 10px;
         }
+
+        .rainbow-frame {
+            width: 100%; min-height: 400px; border: 4px solid transparent;
+            border-image: linear-gradient(45deg, #f06, #9f6, #06f, #f06) 1;
+            background: #000; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;
+        }
+
         #generated-img { width: 100%; display: none; }
-        .hidden { display: none; }
+
+        .gen-btn, .dl-btn { 
+            width: 100%; padding: 18px; border: none; border-radius: 12px;
+            font-weight: bold; font-size: 18px; cursor: pointer; margin-top: 10px;
+        }
+        .gen-btn { background: linear-gradient(45deg, #ff00cc, #3333ff); color: white; }
+        .dl-btn { background: #00ffcc; color: #000; display: none; }
+
+        #adPopup {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 6000; flex-direction: column; justify-content: center; align-items: center;
+        }
+
+        footer { margin-top: 50px; padding: 20px; border-top: 1px solid #333; font-size: 14px; color: #888; }
+        .legal-link { color: #00ffcc; cursor: pointer; text-decoration: underline; margin: 0 10px; }
+
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 7000; overflow-y: auto; padding: 20px;
+        }
+        .modal-content {
+            background: #1a1a1a; color: #ccc; margin: 5% auto; padding: 30px;
+            border-radius: 20px; max-width: 600px; text-align: left; line-height: 1.6;
+        }
+        .close-modal { color: #ff00cc; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div id="welcomeScreen" class="welcome-overlay">
         <div class="welcome-card">
-            <div style="font-size: 80px; margin-bottom: 10px;">🦄</div>
-            
-            <h1 style="color:#222; margin: 0 0 10px 0; font-size: 28px;">Welcome to Lapapi.AI</h1>
-            <p style="color:#555; font-size: 16px; line-height: 1.4;">The Magic of AI at Your Fingertips.<br>Create stunning art in seconds.</p>
-            
-            <button class="gen-btn" onclick="document.getElementById('welcomeScreen').style.display='none'">Start Studio</button>
+            <img src="https://i.ibb.co/Xf8R3v90/1769774680684.png" alt="Lapapi.AI Unicorn Logo" class="welcome-logo">
+            <h1 style="color:#222; margin:0;">Welcome to Lapapi.AI</h1>
+            <p style="color:#555;">The Magic of AI at Your Fingertips</p>
+            <button class="gen-btn" style="background:#222;" onclick="document.getElementById('welcomeScreen').style.display='none'">START STUDIO</button>
         </div>
+    </div>
+
+    <div id="adPopup">
+        <h2>Ad Loading...</h2>
+        <div class="ad-banner" style="background:white; color:black;">GOOGLE AD SPACE</div>
+        <p>Wait <span id="timer">3</span> seconds...</p>
+        <button id="closeAd" class="gen-btn" style="width:150px; display:none;" onclick="closeAdPopup()">Close</button>
     </div>
 
     <div class="container">
-        <h1 style="color:#8B0000; font-size: 32px;">Lapapi.AI Studio</h1>
-        
-        <div class="golden-frame">
-            <p id="placeholder">Your masterpiece will appear here</p>
-            <div id="loading" class="hidden">🪄 Creating Magic...</div>
-            <img id="generated-img" alt="Generated Art">
+        <div class="ad-banner">BANNER AD - TOP</div>
+        <h1 class="neon-title">Lapapi.AI</h1>
+
+        <div class="rainbow-frame">
+            <p id="placeholder">Your Masterpiece Appears Here...</p>
+            <div id="loading" style="display:none;">🪄 Magic in Progress...</div>
+            <img id="generated-img">
         </div>
 
-        <textarea id="promptInput" style="width:100%; padding:15px; border-radius:12px; border:2px solid #ccc; font-size: 16px; outline: none;" rows="3" placeholder="Describe your imagination..."></textarea>
+        <textarea id="promptInput" rows="3" style="width:100%; padding:15px; border-radius:12px; background:#222; color:#fff; border:1px solid #444;" placeholder="Describe your imagination..."></textarea>
         
-        <button class="gen-btn" onclick="generateImage()">✨ Generate Magic</button>
-        <p style="font-size:14px; color:#222; margin-top:15px; font-weight: bold;">Daily Limit Remaining: <span id="creditCount" style="color:#d32f2f;">37</span>/37</p>
+        <button class="gen-btn" onclick="triggerAd('generate')">✨ GENERATE IMAGE (ADS)</button>
+        <button id="downloadBtn" class="dl-btn" onclick="triggerAd('download')">📥 DOWNLOAD IMAGE (ADS)</button>
+
+        <div class="ad-banner" style="margin-top:30px;">BANNER AD - BOTTOM</div>
+
+        <footer>
+            <p>&copy; 2026 Lapapi.AI. All Rights Reserved.</p>
+            <span class="legal-link" onclick="openModal('privacy')">Privacy Policy</span>
+            <span class="legal-link" onclick="openModal('terms')">Terms & Conditions</span>
+        </footer>
+    </div>
+
+    <div id="legalModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
     </div>
 
     <script>
-        let credits = 37;
+        let currentTask = '';
 
-        function generateImage() {
-            if (credits <= 0) {
-                alert("Today's limit reached! Come back tomorrow.");
-                return;
+        function openModal(type) {
+            const body = document.getElementById('modalBody');
+            if(type === 'privacy') {
+                body.innerHTML = "<h2>Privacy Policy</h2><p>Your privacy is important to us. We don't store your personal images.</p>";
+            } else {
+                body.innerHTML = "<h2>Terms & Conditions</h2><p>Usage limit: 37 images per day. Do not generate harmful content.</p>";
             }
+            document.getElementById('legalModal').style.display = 'block';
+        }
+        function closeModal() { document.getElementById('legalModal').style.display = 'none'; }
+
+        function triggerAd(task) {
+            currentTask = task;
+            const popup = document.getElementById('adPopup');
+            const timerSpan = document.getElementById('timer');
+            const closeBtn = document.getElementById('closeAd');
+            popup.style.display = 'flex';
+            let count = 3;
+            timerSpan.innerText = count;
+            closeBtn.style.display = 'none';
+            const interval = setInterval(() => {
+                count--;
+                timerSpan.innerText = count;
+                if (count <= 0) { clearInterval(interval); closeBtn.style.display = 'block'; }
+            }, 1000);
+        }
+
+        function closeAdPopup() {
+            document.getElementById('adPopup').style.display = 'none';
+            if (currentTask === 'generate') { processGenerate(); } 
+            else if (currentTask === 'download') { processDownload(); }
+        }
+
+        function processGenerate() {
             const prompt = document.getElementById('promptInput').value;
-            if (!prompt) {
-                alert("Please describe what you want to create!");
-                return;
-            }
-
-            credits--;
-            document.getElementById('creditCount').innerText = credits;
-            
+            if (!prompt) return alert("Please enter a prompt!");
             document.getElementById('placeholder').style.display = 'none';
-            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('loading').style.display = 'block';
             document.getElementById('generated-img').style.display = 'none';
-
-            // Using a reliable AI generation API
-            const seed = Math.floor(Math.random() * 9999999);
-            const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&nologo=true&seed=${seed}`;
-
+            const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&nologo=true&seed=${Math.random()}`;
             const img = document.getElementById('generated-img');
             img.src = url;
             img.onload = () => {
-                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('loading').style.display = 'none';
                 img.style.display = 'block';
+                document.getElementById('downloadBtn').style.display = 'block';
             };
+        }
+
+        function processDownload() {
+            const img = document.getElementById('generated-img');
+            const link = document.createElement('a');
+            link.href = img.src;
+            link.download = 'Lapapi-AI-Art.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 </body>
