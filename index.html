@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lapapi.AI - Neon Magic Studio</title>
+    <title>Lapapi.AI - Magic Studio</title>
     <style>
         * { box-sizing: border-box; transition: 0.3s; font-family: 'Poppins', sans-serif; }
         
-        /* Welcome Screen: Dark Pink & Light Parrot Green */
+        /* Welcome Screen: Dark Pink & Parrot Green */
         .welcome-overlay { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: linear-gradient(135deg, #FF1493 0%, #ADFF2F 100%); 
@@ -19,18 +19,20 @@
             max-width: 450px; width: 90%; text-align: center; box-shadow: 0 15px 45px rgba(0,0,0,0.3);
         }
 
-        /* Unnudaiya Unicorn Logo Styling */
+        /* Unnudaiya Unicorn Logo */
         .welcome-logo { 
             width: 100%; max-width: 250px; height: auto; 
             border-radius: 20px; margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
+        /* Generation Page: Glowing Neon Style */
         body { margin: 0; background: #050505; color: #fff; text-align: center; }
+        
         .neon-title {
             font-size: 3rem; font-weight: bold; margin: 20px 0;
             background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff, #ff00ff);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(0,255,255,0.5));
         }
 
         .container { padding: 20px; max-width: 700px; margin: 0 auto; min-height: 100vh; }
@@ -56,6 +58,7 @@
         .gen-btn { background: linear-gradient(45deg, #ff00cc, #3333ff); color: white; }
         .dl-btn { background: #00ffcc; color: #000; display: none; }
 
+        /* Ad Popup */
         #adPopup {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); z-index: 6000; flex-direction: column; justify-content: center; align-items: center;
@@ -70,45 +73,44 @@
         }
         .modal-content {
             background: #1a1a1a; color: #ccc; margin: 5% auto; padding: 30px;
-            border-radius: 20px; max-width: 600px; text-align: left; line-height: 1.6;
+            border-radius: 20px; max-width: 600px; text-align: left;
         }
-        .close-modal { color: #ff00cc; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div id="welcomeScreen" class="welcome-overlay">
         <div class="welcome-card">
-            <img src="https://i.ibb.co/Xf8R3v90/1769774680684.png" alt="Lapapi.AI Unicorn Logo" class="welcome-logo">
+            <img src="1769774680684.png" alt="Lapapi.AI Logo" class="welcome-logo">
             <h1 style="color:#222; margin:0;">Welcome to Lapapi.AI</h1>
-            <p style="color:#555;">The Magic of AI at Your Fingertips</p>
+            <p style="color:#555;">Create Stunning AI Art in Seconds</p>
             <button class="gen-btn" style="background:#222;" onclick="document.getElementById('welcomeScreen').style.display='none'">START STUDIO</button>
         </div>
     </div>
 
     <div id="adPopup">
-        <h2>Ad Loading...</h2>
-        <div class="ad-banner" style="background:white; color:black;">GOOGLE AD SPACE</div>
-        <p>Wait <span id="timer">3</span> seconds...</p>
-        <button id="closeAd" class="gen-btn" style="width:150px; display:none;" onclick="closeAdPopup()">Close</button>
+        <h2>Loading Magic...</h2>
+        <div class="ad-banner" style="background:white; color:black;">ADSENSE INTERSTITIAL AD SPACE</div>
+        <p>Please wait <span id="timer">3</span> seconds...</p>
+        <button id="closeAd" class="gen-btn" style="width:150px; display:none;" onclick="closeAdPopup()">Close Ad</button>
     </div>
 
     <div class="container">
-        <div class="ad-banner">BANNER AD - TOP</div>
+        <div class="ad-banner">GOOGLE ADSENSE BANNER - TOP</div>
         <h1 class="neon-title">Lapapi.AI</h1>
 
         <div class="rainbow-frame">
-            <p id="placeholder">Your Masterpiece Appears Here...</p>
-            <div id="loading" style="display:none;">🪄 Magic in Progress...</div>
+            <p id="placeholder">Your Magic Appears Here...</p>
+            <div id="loading" style="display:none;">🪄 Mixing Colors...</div>
             <img id="generated-img">
         </div>
 
         <textarea id="promptInput" rows="3" style="width:100%; padding:15px; border-radius:12px; background:#222; color:#fff; border:1px solid #444;" placeholder="Describe your imagination..."></textarea>
         
-        <button class="gen-btn" onclick="triggerAd('generate')">✨ GENERATE IMAGE (ADS)</button>
-        <button id="downloadBtn" class="dl-btn" onclick="triggerAd('download')">📥 DOWNLOAD IMAGE (ADS)</button>
+        <button class="gen-btn" onclick="triggerAd('generate')">✨ GENERATE ART (ADS)</button>
+        <button id="downloadBtn" class="dl-btn" onclick="triggerAd('download')">📥 DOWNLOAD ART (ADS)</button>
 
-        <div class="ad-banner" style="margin-top:30px;">BANNER AD - BOTTOM</div>
+        <div class="ad-banner" style="margin-top:30px;">GOOGLE ADSENSE BANNER - BOTTOM</div>
 
         <footer>
             <p>&copy; 2026 Lapapi.AI. All Rights Reserved.</p>
@@ -119,72 +121,5 @@
 
     <div id="legalModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div id="modalBody"></div>
-        </div>
-    </div>
-
-    <script>
-        let currentTask = '';
-
-        function openModal(type) {
-            const body = document.getElementById('modalBody');
-            if(type === 'privacy') {
-                body.innerHTML = "<h2>Privacy Policy</h2><p>Your privacy is important to us. We don't store your personal images.</p>";
-            } else {
-                body.innerHTML = "<h2>Terms & Conditions</h2><p>Usage limit: 37 images per day. Do not generate harmful content.</p>";
-            }
-            document.getElementById('legalModal').style.display = 'block';
-        }
-        function closeModal() { document.getElementById('legalModal').style.display = 'none'; }
-
-        function triggerAd(task) {
-            currentTask = task;
-            const popup = document.getElementById('adPopup');
-            const timerSpan = document.getElementById('timer');
-            const closeBtn = document.getElementById('closeAd');
-            popup.style.display = 'flex';
-            let count = 3;
-            timerSpan.innerText = count;
-            closeBtn.style.display = 'none';
-            const interval = setInterval(() => {
-                count--;
-                timerSpan.innerText = count;
-                if (count <= 0) { clearInterval(interval); closeBtn.style.display = 'block'; }
-            }, 1000);
-        }
-
-        function closeAdPopup() {
-            document.getElementById('adPopup').style.display = 'none';
-            if (currentTask === 'generate') { processGenerate(); } 
-            else if (currentTask === 'download') { processDownload(); }
-        }
-
-        function processGenerate() {
-            const prompt = document.getElementById('promptInput').value;
-            if (!prompt) return alert("Please enter a prompt!");
-            document.getElementById('placeholder').style.display = 'none';
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('generated-img').style.display = 'none';
-            const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&nologo=true&seed=${Math.random()}`;
-            const img = document.getElementById('generated-img');
-            img.src = url;
-            img.onload = () => {
-                document.getElementById('loading').style.display = 'none';
-                img.style.display = 'block';
-                document.getElementById('downloadBtn').style.display = 'block';
-            };
-        }
-
-        function processDownload() {
-            const img = document.getElementById('generated-img');
-            const link = document.createElement('a');
-            link.href = img.src;
-            link.download = 'Lapapi-AI-Art.png';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-    </script>
-</body>
-</html>
+            <span style="color:#ff00cc; float:right; font-size:28px; cursor:pointer;" onclick="closeModal()">&times;</span>
+            <div id="modalBody
