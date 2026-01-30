@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lapapi.AI - Magic Studio</title>
+    
+    <title>Lapapi.AI - Best Free AI Image Generator | Create Magic Art</title>
+    <meta name="description" content="Lapapi.AI is the best Free AI Image Generator. Create high-quality, amazing AI art and magic photos in seconds for free. No login required.">
+    <meta name="keywords" content="free ai image generator, best free ai art, lapapi ai, ai photo generator free, magic studio ai, fast ai art generator">
+    <meta name="author" content="Lapapi">
+
     <style>
         * { box-sizing: border-box; transition: 0.3s; font-family: 'Poppins', sans-serif; }
         body { margin: 0; background: #050505; color: #fff; text-align: center; overflow-x: hidden; }
         
+        /* Welcome Screen */
         .welcome-overlay { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: linear-gradient(135deg, #FF1493 0%, #ADFF2F 100%); 
             z-index: 5000; display: flex; justify-content: center; align-items: center; 
         }
-        
         .welcome-card {
             background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 30px;
             max-width: 400px; width: 90%; text-align: center; box-shadow: 0 15px 45px rgba(0,0,0,0.3);
         }
-
         .welcome-logo { width: 100%; max-width: 200px; border-radius: 15px; margin-bottom: 15px; }
+
+        /* Main Page Styles */
         .container { padding: 15px; max-width: 600px; margin: 0 auto; min-height: 100vh; }
         .neon-title {
             font-size: 2.5rem; font-weight: bold; margin: 15px 0;
@@ -58,6 +64,9 @@
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); z-index: 6000; flex-direction: column; justify-content: center; align-items: center;
         }
+
+        footer { margin-top: 30px; padding: 20px; font-size: 12px; color: #666; }
+        .legal-link { color: #00ffcc; cursor: pointer; text-decoration: none; margin: 0 10px; }
     </style>
 </head>
 <body>
@@ -65,8 +74,9 @@
     <div id="welcomeScreen" class="welcome-overlay">
         <div class="welcome-card">
             <img src="1769774680684.png" alt="Logo" class="welcome-logo">
-            <h2 style="color:#222; margin:0;">Welcome to Lapapi.AI</h2>
-            <button class="gen-btn" style="background:#222;" onclick="document.getElementById('welcomeScreen').style.display='none'">START STUDIO</button>
+            <h2 style="color:#222; margin:0;">Lapapi.AI</h2>
+            <p style="color:#666; font-size: 14px;">The Best Free AI Image Generator</p>
+            <button class="gen-btn" style="background:#222;" onclick="document.getElementById('welcomeScreen').style.display='none'">START CREATING</button>
         </div>
     </div>
 
@@ -80,6 +90,7 @@
     <div class="container">
         <div class="ad-banner">GOOGLE ADSENSE - TOP</div>
         <h1 class="neon-title">Lapapi.AI</h1>
+
         <div class="rainbow-frame">
             <p id="placeholder" style="color:#666;">Describe your art below...</p>
             <div id="loading" style="display:none;">
@@ -88,10 +99,19 @@
             </div>
             <img id="generated-img">
         </div>
-        <input type="text" id="promptInput" class="input-box" placeholder="e.g. Red Apple">
-        <button class="gen-btn" onclick="triggerAd('generate')">✨ GENERATE ART (ADS)</button>
-        <button id="downloadBtn" class="dl-btn" onclick="triggerAd('download')">📥 DOWNLOAD IMAGE (ADS)</button>
+
+        <input type="text" id="promptInput" class="input-box" placeholder="e.g. A futuristic robot in rain">
+        
+        <button class="gen-btn" onclick="triggerAd('generate')">✨ GENERATE ART (FREE)</button>
+        <button id="downloadBtn" class="dl-btn" onclick="triggerAd('download')">📥 DOWNLOAD IMAGE</button>
+
         <div class="ad-banner" style="margin-top:20px;">GOOGLE ADSENSE - BOTTOM</div>
+
+        <footer>
+            <p>&copy; 2026 Lapapi.AI - Free AI Image Generator</p>
+            <a href="#" class="legal-link">Privacy Policy</a>
+            <a href="#" class="legal-link">Terms & Conditions</a>
+        </footer>
     </div>
 
     <script>
@@ -101,7 +121,7 @@
         function triggerAd(task) {
             currentTask = task;
             const prompt = document.getElementById('promptInput').value;
-            if (task === 'generate' && !prompt) return alert("Please enter a prompt!");
+            if (task === 'generate' && !prompt) return alert("Please type your imagination!");
             const popup = document.getElementById('adPopup');
             popup.style.display = 'flex';
             let count = 3;
@@ -141,9 +161,8 @@
                 timerDisplay.innerText = seconds + "s";
             }, 1000);
 
-            // Updated and Fixed URL format
             const seed = Math.floor(Math.random() * 999999);
-            const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&seed=${seed}&nologo=true&model=flux`;
+            const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&seed=${seed}&nologo=true&model=flux-pro`;
 
             img.src = imageUrl;
             img.onload = () => {
@@ -164,7 +183,7 @@
             const img = document.getElementById('generated-img');
             const link = document.createElement('a');
             link.href = img.src;
-            link.download = `Lapapi_AI_${Date.now()}.png`;
+            link.download = `Lapapi_Free_AI_${Date.now()}.png`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
