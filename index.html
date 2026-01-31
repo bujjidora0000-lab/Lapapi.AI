@@ -5,13 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lapapi.AI - Free AI Image Generator</title>
     <link rel="icon" href="1769774680684.png" type="image/png">
+    
     <style>
         * { box-sizing: border-box; transition: 0.3s; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
         body { margin: 0; background: #050505; color: #fff; text-align: center; overflow-x: hidden; }
         
+        /* Ad Banner Style */
+        .ad-slot {
+            width: 100%;
+            min-height: 90px;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            font-size: 10px;
+            border: 1px dashed #333;
+            border-radius: 8px;
+        }
+
         /* Navigation & Hamburger */
         nav { background: #111; padding: 15px 25px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 4000; }
-        .logo-text { font-weight: bold; color: #00ffcc; font-size: 1.2rem; }
+        .logo-text { font-weight: bold; color: #00ffcc; font-size: 1.2rem; cursor: pointer; }
         .nav-links { display: flex; gap: 20px; }
         .nav-links a, .nav-links span { color: #fff; text-decoration: none; font-size: 14px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
         
@@ -64,7 +80,7 @@
     </div>
 
     <nav>
-        <div class="logo-text">Lapapi.AI</div>
+        <div class="logo-text" onclick="toggleWelcome(true)">Lapapi.AI</div>
         <div class="hamburger" onclick="toggleMenu()">
             <div></div><div></div><div></div>
         </div>
@@ -76,15 +92,22 @@
         </div>
     </nav>
 
+    <div class="container" style="min-height: auto; padding-bottom: 0;">
+        <div class="ad-slot">AD REVENUE SPACE - TOP BANNER</div>
+    </div>
+
     <div id="adPopup">
         <h3>Loading Advertisement...</h3>
-        <div style="background:white; height: 250px; width: 300px; display:flex; align-items:center; justify-content:center; color:black; border-radius: 10px;">AD SLOT</div>
+        <div style="background:white; height: 250px; width: 300px; display:flex; align-items:center; justify-content:center; color:black; border-radius: 10px;">
+            <p>AD SPACE (POPUP)</p>
+        </div>
         <p>Wait <span id="timer">3</span>s...</p>
         <button id="closeAd" class="gen-btn" style="width:120px; display:none;" onclick="closeAdPopup()">Close</button>
     </div>
 
     <div class="container">
         <h1 class="neon-title">Lapapi.AI</h1>
+        
         <div class="rainbow-frame">
             <p id="placeholder" style="color:#444;">Describe your vision below...</p>
             <div id="loading" style="display:none;">
@@ -93,17 +116,26 @@
             </div>
             <img id="generated-img">
         </div>
+
+        <div class="ad-slot">AD REVENUE SPACE - ABOVE INPUT</div>
         
         <input type="text" id="promptInput" class="input-box" placeholder="e.g. A futuristic robot in rain">
-        <button class="gen-btn" onclick="triggerAd('generate')">GENERATE ART (ADS)</button>
-        <button id="downloadBtn" class="dl-btn" onclick="triggerAd('download')">DOWNLOAD IMAGE</button>
+        
+        <button class="gen-btn" onclick="triggerAd('generate')">✨ GENERATE ART (ADS)</button>
+        
+        <div class="ad-slot" style="min-height: 50px;">AD REVENUE SPACE - BUTTON DIVIDER</div>
+
+        <button id="downloadBtn" class="dl-btn" onclick="triggerAd('download')">📥 DOWNLOAD IMAGE (ADS)</button>
 
         <div class="article-card">
             <h2>The Ultimate Guide to Lapapi.AI</h2>
             <p>Lapapi.AI is an advanced free platform that transforms your imagination into reality using cutting-edge AI technology. Our Magic Studio allows you to create high-resolution images by simply describing them in words. It's free, fast, and requires no registration.</p>
+            <div class="ad-slot">AD REVENUE SPACE - INSIDE CONTENT</div>
             <h3>How to get best results?</h3>
             <p>To get stunning images, use descriptive prompts including lighting, style (e.g., Oil painting, Cinematic), and camera angles. Every image created on Lapapi.AI is unique and yours to explore.</p>
         </div>
+
+        <div class="ad-slot">AD REVENUE SPACE - BOTTOM BANNER</div>
 
         <div class="cookie-consent">
             Notice: We use cookies to improve your experience. By using our site, you agree to our Privacy Policy.
