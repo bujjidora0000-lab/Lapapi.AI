@@ -6,27 +6,13 @@
     
     <title>Lapapi.AI - Best Free AI Image Generator</title>
     <meta name="description" content="Generate high-quality AI images for free with Lapapi.AI Magic Studio. No login required.">
-    
     <meta property="og:site_name" content="Lapapi.AI">
-    <meta property="og:title" content="Lapapi.AI - Magic Art Studio">
-    <meta property="og:description" content="Create stunning AI images for free.">
     <meta name="apple-mobile-web-app-title" content="Lapapi.AI">
     
-    <link rel="icon" href="https://raw.githubusercontent.com/bujjidora0000-lab/Lapapi.AI/main/1769837717005.png" type="image/png">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/bujjidora0000-lab/Lapapi.AI/main/1769837717005.png">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Lapapi.AI",
-      "alternateName": "Lapapi",
-      "url": "https://lapapi-ai.vercel.app/"
-    }
-    </script>
+    <link rel="icon" href="1769774680684.png" type="image/png">
+    <link rel="apple-touch-icon" href="1769774680684.png">
 
     <style>
-        /* உங்கள் பழைய ஸ்டைல்கள் அப்படியே இருக்கும் */
         * { box-sizing: border-box; transition: 0.3s; font-family: 'Poppins', sans-serif; }
         body { margin: 0; background: #050505; color: #fff; text-align: center; overflow-x: hidden; }
         
@@ -81,6 +67,16 @@
             background: rgba(0,0,0,0.95); z-index: 6000; flex-direction: column; justify-content: center; align-items: center;
         }
 
+        /* Article Section Styles */
+        .article-section {
+            text-align: left; background: #111; padding: 25px; border-radius: 20px; 
+            margin-top: 30px; line-height: 1.6; border: 1px solid #333; margin-bottom: 30px;
+        }
+        .article-section h2 { color: #00ffcc; font-size: 1.5rem; margin-top: 0; }
+        .article-section h3 { color: #ff00cc; font-size: 1.2rem; }
+        .article-section p, .article-section li { color: #ccc; font-size: 14px; }
+        .prompt-example { background: #000; padding: 12px; border-left: 3px solid #ff00cc; margin: 10px 0; font-family: monospace; color: #00ffcc; font-size: 13px; }
+
         footer { margin-top: 50px; padding: 20px; background: #111; font-size: 12px; color: #777; }
         .footer-links { margin-top: 10px; }
         .footer-links span { margin: 0 10px; cursor: pointer; color: #4facfe; text-decoration: underline; }
@@ -100,7 +96,7 @@
 
     <div id="welcomeScreen" class="welcome-overlay">
         <div class="welcome-card">
-            <img src="https://raw.githubusercontent.com/bujjidora0000-lab/Lapapi.AI/main/1769837717005.png" alt="Logo" class="welcome-logo">
+            <img src="1769774680684.png" alt="Logo" class="welcome-logo">
             <h2 style="color:#222; margin:0;">Welcome to Lapapi.AI</h2>
             <button class="gen-btn" style="background:#222;" onclick="document.getElementById('welcomeScreen').style.display='none'">START STUDIO</button>
         </div>
@@ -128,6 +124,27 @@
         <button class="gen-btn" onclick="triggerAd('generate')">✨ GENERATE ART (ADS)</button>
         <button id="downloadBtn" class="dl-btn" onclick="triggerAd('download')">📥 DOWNLOAD IMAGE (ADS)</button>
         <div class="ad-banner" style="margin-top:20px;">GOOGLE ADSENSE - BOTTOM</div>
+
+        <div class="article-section">
+            <h2>How to Use Lapapi.AI Magic Studio</h2>
+            <p>Lapapi.AI is an advanced AI image generation tool that allows you to create high-quality digital art for free. Whether you want to design wallpapers, social media posts, or creative concepts, our AI is here to help.</p>
+            
+            <h3>Easy Steps to Generate Art:</h3>
+            <ul>
+                <li><b>Enter Details:</b> Type your imagination in the prompt box above.</li>
+                <li><b>Click Generate:</b> Our AI engine (Flux Model) will start creating your unique image.</li>
+                <li><b>Instant Download:</b> Once the magic is done, save it to your gallery instantly.</li>
+            </ul>
+
+            <h3>Best Prompts for Best Results:</h3>
+            <p>To get professional-grade images, try using these descriptive prompt styles:</p>
+            
+            <div class="prompt-example">"Sovereign lion wearing a golden crown, 8k cinematic, highly detailed fur, dark background."</div>
+            <div class="prompt-example">"Futuristic Chennai city with flying cars, cyberpunk style, neon lights, rainy night."</div>
+            <div class="prompt-example">"A cute 3D animated robot holding a flower, Pixar style, soft lighting, vibrant colors."</div>
+
+            <p>Using keywords like <i>"Hyper-realistic", "4K", "Cinematic Lighting",</i> and <i>"Digital Art"</i> will significantly improve the quality of your results.</p>
+        </div>
     </div>
 
     <footer>
@@ -147,7 +164,6 @@
     </div>
 
     <script>
-        // உங்கள் பழைய ஸ்கிரிப்ட் அப்படியே இங்கு இருக்கும்
         let currentTask = '';
         let timerInterval;
 
@@ -225,11 +241,11 @@
         function openPage(type) {
             let content = "";
             if(type === 'about') {
-                content = "<h2>About Us</h2><p>Lapapi.AI Magic Studio is a free AI-powered platform designed to turn your creative prompts into stunning visual art.</p>";
+                content = "<h2>About Us</h2><p>Lapapi.AI Magic Studio is a free AI-powered platform designed to turn your creative prompts into stunning visual art. We use advanced machine learning models to provide high-quality art generation for everyone.</p>";
             } else if(type === 'contact') {
-                content = "<h2>Contact Us</h2><p>Email us at: <b>Bujjidora0000@gmail.com</b></p>";
+                content = "<h2>Contact Us</h2><p>If you have any questions or feedback, please email us at:</p><p style='color:#00ffcc;'><b>Bujjidora0000@gmail.com</b></p>";
             } else if(type === 'privacy') {
-                content = "<h2>Privacy Policy</h2><p>We use third-party tools like Google AdSense for ads.</p>";
+                content = "<h2>Privacy Policy</h2><p>Your privacy is important. Lapapi.AI does not store your generated images or personal data on our servers. We use third-party tools like Google AdSense which may use cookies to serve relevant advertisements.</p>";
             }
             document.getElementById('modalText').innerHTML = content;
             document.getElementById('infoModal').style.display = 'block';
@@ -240,4 +256,4 @@
     </script>
 </body>
     </html>
-
+            
