@@ -6,13 +6,27 @@
     
     <title>Lapapi.AI - Best Free AI Image Generator</title>
     <meta name="description" content="Generate high-quality AI images for free with Lapapi.AI Magic Studio. No login required.">
+    
     <meta property="og:site_name" content="Lapapi.AI">
+    <meta property="og:title" content="Lapapi.AI - Magic Art Studio">
+    <meta property="og:description" content="Create stunning AI images for free.">
     <meta name="apple-mobile-web-app-title" content="Lapapi.AI">
     
-    <link rel="icon" href="1769774680684.png" type="image/png">
-    <link rel="apple-touch-icon" href="1769774680684.png">
+    <link rel="icon" href="https://raw.githubusercontent.com/bujjidora0000-lab/Lapapi.AI/main/1769837717005.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/bujjidora0000-lab/Lapapi.AI/main/1769837717005.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Lapapi.AI",
+      "alternateName": "Lapapi",
+      "url": "https://lapapi-ai.vercel.app/"
+    }
+    </script>
 
     <style>
+        /* உங்கள் பழைய ஸ்டைல்கள் அப்படியே இருக்கும் */
         * { box-sizing: border-box; transition: 0.3s; font-family: 'Poppins', sans-serif; }
         body { margin: 0; background: #050505; color: #fff; text-align: center; overflow-x: hidden; }
         
@@ -67,7 +81,6 @@
             background: rgba(0,0,0,0.95); z-index: 6000; flex-direction: column; justify-content: center; align-items: center;
         }
 
-        /* புதிய Footer மற்றும் Modal ஸ்டைல்கள் */
         footer { margin-top: 50px; padding: 20px; background: #111; font-size: 12px; color: #777; }
         .footer-links { margin-top: 10px; }
         .footer-links span { margin: 0 10px; cursor: pointer; color: #4facfe; text-decoration: underline; }
@@ -87,7 +100,7 @@
 
     <div id="welcomeScreen" class="welcome-overlay">
         <div class="welcome-card">
-            <img src="1769774680684.png" alt="Logo" class="welcome-logo">
+            <img src="https://raw.githubusercontent.com/bujjidora0000-lab/Lapapi.AI/main/1769837717005.png" alt="Logo" class="welcome-logo">
             <h2 style="color:#222; margin:0;">Welcome to Lapapi.AI</h2>
             <button class="gen-btn" style="background:#222;" onclick="document.getElementById('welcomeScreen').style.display='none'">START STUDIO</button>
         </div>
@@ -134,6 +147,7 @@
     </div>
 
     <script>
+        // உங்கள் பழைய ஸ்கிரிப்ட் அப்படியே இங்கு இருக்கும்
         let currentTask = '';
         let timerInterval;
 
@@ -208,15 +222,14 @@
             document.body.removeChild(link);
         }
 
-        // Modal Logic
         function openPage(type) {
             let content = "";
             if(type === 'about') {
-                content = "<h2>About Us</h2><p>Lapapi.AI Magic Studio is a free AI-powered platform designed to turn your creative prompts into stunning visual art. We use advanced machine learning models to provide high-quality art generation for everyone.</p>";
+                content = "<h2>About Us</h2><p>Lapapi.AI Magic Studio is a free AI-powered platform designed to turn your creative prompts into stunning visual art.</p>";
             } else if(type === 'contact') {
-                content = "<h2>Contact Us</h2><p>If you have any questions or feedback, please email us at:</p><p style='color:#00ffcc;'><b>Bujjidora0000@gmail.com</b></p>";
+                content = "<h2>Contact Us</h2><p>Email us at: <b>Bujjidora0000@gmail.com</b></p>";
             } else if(type === 'privacy') {
-                content = "<h2>Privacy Policy</h2><p>Your privacy is important. Lapapi.AI does not store your generated images or personal data on our servers. We use third-party tools like Google AdSense which may use cookies to serve relevant advertisements.</p>";
+                content = "<h2>Privacy Policy</h2><p>We use third-party tools like Google AdSense for ads.</p>";
             }
             document.getElementById('modalText').innerHTML = content;
             document.getElementById('infoModal').style.display = 'block';
@@ -227,4 +240,4 @@
     </script>
 </body>
     </html>
-    
+
