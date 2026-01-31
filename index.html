@@ -8,30 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lapapi.AI - Free AI Image Generator</title>
     <link rel="icon" href="1769774680684.png" type="image/png">
-    
     <style>
         * { box-sizing: border-box; transition: 0.3s; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
         body { margin: 0; background: #050505; color: #fff; text-align: center; overflow-x: hidden; }
         
-        /* Ad Slots Design */
-        .ad-slot {
-            width: 100%;
-            min-height: 90px;
-            background: rgba(255, 255, 255, 0.03);
-            margin: 15px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #333;
-            font-size: 10px;
-            border: 1px dashed #222;
-            border-radius: 8px;
-        }
-
+        /* Navigation & Hamburger */
         nav { background: #111; padding: 15px 25px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 4000; }
-        .logo-text { font-weight: bold; color: #00ffcc; font-size: 1.2rem; cursor: pointer; }
+        .logo-text { font-weight: bold; color: #00ffcc; font-size: 1.2rem; }
         .nav-links { display: flex; gap: 20px; }
-        .nav-links span, .nav-links a { color: #fff; text-decoration: none; font-size: 14px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        .nav-links a, .nav-links span { color: #fff; text-decoration: none; font-size: 14px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
         
         .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
         .hamburger div { width: 25px; height: 3px; background-color: #fff; border-radius: 5px; }
@@ -42,23 +27,28 @@
             .hamburger { display: flex; }
         }
 
+        /* Welcome Overlay */
         .welcome-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #FF1493 0%, #ADFF2F 100%); z-index: 5000; display: flex; justify-content: center; align-items: center; visibility: visible; opacity: 1; }
         .welcome-overlay.hidden { visibility: hidden; opacity: 0; }
         .welcome-card { background: rgba(255, 255, 255, 0.95); padding: 35px; border-radius: 30px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 15px 45px rgba(0,0,0,0.3); }
+        .welcome-logo { width: 100%; max-width: 180px; border-radius: 15px; margin-bottom: 15px; }
 
+        /* Rest of the UI */
         .container { padding: 15px; max-width: 700px; margin: 0 auto; min-height: 100vh; }
         .neon-title { font-size: 2.5rem; font-weight: bold; margin: 15px 0; background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff, #ff00ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .rainbow-frame { width: 100%; aspect-ratio: 1 / 1; border: 4px solid transparent; border-image: linear-gradient(45deg, #f06, #9f6, #06f, #f06) 1; background: #000; margin-bottom: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; }
         #generated-img { width: 100%; height: 100%; object-fit: cover; display: none; }
-        
         .input-box { width: 100%; padding: 15px; border-radius: 12px; background: #222; color: #fff; border: 1px solid #444; font-size: 16px; margin-bottom: 10px; outline: none; }
         .gen-btn, .dl-btn { width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 8px; }
         .gen-btn { background: linear-gradient(45deg, #ff00cc, #3333ff); color: white; }
         .dl-btn { background: #00ffcc; color: #000; display: none; }
         
         .article-card { background: #111; padding: 25px; border-radius: 20px; text-align: left; margin-top: 30px; border: 1px solid #333; line-height: 1.8; }
+        .article-card h2 { color: #00ffcc; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .cookie-consent { background: #1a1a1a; color: #777; padding: 15px; font-size: 11px; margin-top: 30px; }
         footer { padding: 40px 20px; background: #000; font-size: 12px; color: #555; }
-
+        
+        /* Modals */
         #adPopup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 6000; flex-direction: column; justify-content: center; align-items: center; }
         .modal { display: none; position: fixed; z-index: 7000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); }
         .modal-content { background: #1a1a1a; margin: 10% auto; padding: 30px; width: 90%; max-width: 550px; border-radius: 20px; text-align: left; position: relative; }
@@ -69,14 +59,15 @@
 
     <div id="welcomeScreen" class="welcome-overlay">
         <div class="welcome-card">
-            <img src="1769774680684.png" alt="Logo" style="width:100px; margin-bottom:15px;">
-            <h2 style="color:#222;">Welcome to Lapapi.AI</h2>
+            <img src="1769774680684.png" alt="Logo" class="welcome-logo">
+            <h2 style="color:#222; margin:0;">Welcome to Lapapi.AI</h2>
+            <p style="color:#666; margin-bottom: 20px;">Your Professional Magic AI Studio</p>
             <button class="gen-btn" style="background:#222;" onclick="toggleWelcome(false)">GET STARTED</button>
         </div>
     </div>
 
     <nav>
-        <div class="logo-text" onclick="toggleWelcome(true)">Lapapi.AI</div>
+        <div class="logo-text">Lapapi.AI</div>
         <div class="hamburger" onclick="toggleMenu()">
             <div></div><div></div><div></div>
         </div>
@@ -88,10 +79,8 @@
         </div>
     </nav>
 
-    <div class="container" style="min-height:auto;"><div class="ad-slot">ADVERTISEMENT</div></div>
-
     <div id="adPopup">
-        <h3>Loading Ad...</h3>
+        <h3>Loading Advertisement...</h3>
         <div style="background:white; height: 250px; width: 300px; display:flex; align-items:center; justify-content:center; color:black; border-radius: 10px;">AD SLOT</div>
         <p>Wait <span id="timer">3</span>s...</p>
         <button id="closeAd" class="gen-btn" style="width:120px; display:none;" onclick="closeAdPopup()">Close</button>
@@ -100,46 +89,72 @@
     <div class="container">
         <h1 class="neon-title">Lapapi.AI</h1>
         <div class="rainbow-frame">
-            <p id="placeholder" style="color:#444;">Describe your vision...</p>
-            <div id="loading" style="display:none; color:#00ffcc;">Generating Art... <span id="liveTimer">0s</span></div>
+            <p id="placeholder" style="color:#444;">Describe your vision below...</p>
+            <div id="loading" style="display:none;">
+                <div style="color: #00ffcc; font-weight: bold;">Generating Art...</div>
+                <div id="liveTimer" style="font-size: 30px; color: #ff00cc;">0s</div>
+            </div>
             <img id="generated-img">
         </div>
-
-        <div class="ad-slot">ADVERTISEMENT</div>
-
-        <input type="text" id="promptInput" class="input-box" placeholder="e.g. A neon cyber cat">
+        
+        <input type="text" id="promptInput" class="input-box" placeholder="e.g. A futuristic robot in rain">
         <button class="gen-btn" onclick="triggerAd('generate')">GENERATE ART (ADS)</button>
         <button id="downloadBtn" class="dl-btn" onclick="triggerAd('download')">DOWNLOAD IMAGE</button>
 
-        <div class="ad-slot">ADVERTISEMENT</div>
-
         <div class="article-card">
-            <h2>The Ultimate Guide</h2>
-            <p>Lapapi.AI uses high-end technology to bring your prompts to life. Explore endless possibilities for free.</p>
+            <h2>The Ultimate Guide to Lapapi.AI</h2>
+            <p>Lapapi.AI is an advanced free platform that transforms your imagination into reality using cutting-edge AI technology. Our Magic Studio allows you to create high-resolution images by simply describing them in words. It's free, fast, and requires no registration.</p>
+            <h3>How to get best results?</h3>
+            <p>To get stunning images, use descriptive prompts including lighting, style (e.g., Oil painting, Cinematic), and camera angles. Every image created on Lapapi.AI is unique and yours to explore.</p>
+        </div>
+
+        <div class="cookie-consent">
+            Notice: We use cookies to improve your experience. By using our site, you agree to our Privacy Policy.
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 Lapapi.AI Studio</p>
-        <div>
-            <span onclick="openPage('privacy')" style="cursor:pointer; color:#4facfe;">Privacy Policy</span>
+        <p>&copy; 2026 Lapapi.AI Studio | All Rights Reserved.</p>
+        <div style="margin-top: 15px;">
+            <span onclick="openPage('about')" style="margin: 0 10px; cursor:pointer; color: #4facfe;">About</span>
+            <span onclick="openPage('contact')" style="margin: 0 10px; cursor:pointer; color: #4facfe;">Contact</span>
+            <span onclick="openPage('privacy')" style="margin: 0 10px; cursor:pointer; color: #4facfe;">Privacy Policy</span>
         </div>
     </footer>
 
-    <div id="infoModal" class="modal"><div class="modal-content"><span class="close-modal" onclick="closeModal()">&times;</span><div id="modalText"></div></div></div>
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalText"></div>
+        </div>
+    </div>
 
     <script>
         let currentTask = '';
         let timerInterval;
+        const serverDownImg = "https://raw.githubusercontent.com/bujjidora0000-lab/Lapapi.AI/main/1769847225229.png";
 
-        function toggleWelcome(show) { document.getElementById('welcomeScreen').classList.toggle('hidden', !show); }
-        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
+        function toggleWelcome(show) {
+            const screen = document.getElementById('welcomeScreen');
+            if(show) screen.classList.remove('hidden');
+            else screen.classList.add('hidden');
+        }
+
+        function toggleMenu() {
+            const links = document.getElementById('navLinks');
+            if (window.innerWidth <= 768) {
+                links.classList.toggle('active');
+            }
+        }
 
         function triggerAd(task) {
             currentTask = task;
-            if (task === 'generate' && !document.getElementById('promptInput').value) return alert("Enter a prompt!");
-            document.getElementById('adPopup').style.display = 'flex';
+            const prompt = document.getElementById('promptInput').value;
+            if (task === 'generate' && !prompt) return alert("Please enter a prompt!");
+            const popup = document.getElementById('adPopup');
+            popup.style.display = 'flex';
             let count = 3;
+            document.getElementById('timer').innerText = count;
             document.getElementById('closeAd').style.display = 'none';
             const interval = setInterval(() => {
                 count--;
@@ -150,45 +165,89 @@
 
         function closeAdPopup() {
             document.getElementById('adPopup').style.display = 'none';
-            if (currentTask === 'generate') processGenerate(); else processDownload();
+            if (currentTask === 'generate') { processGenerate(); } 
+            else { processDownload(); }
         }
 
         function processGenerate() {
             const prompt = document.getElementById('promptInput').value;
+            const placeholder = document.getElementById('placeholder');
+            const loading = document.getElementById('loading');
             const img = document.getElementById('generated-img');
-            document.getElementById('placeholder').style.display = 'none';
-            document.getElementById('loading').style.display = 'block';
-            img.style.display = 'none';
-            
-            let sec = 0;
-            timerInterval = setInterval(() => { sec++; document.getElementById('liveTimer').innerText = sec + "s"; }, 1000);
+            const dlBtn = document.getElementById('downloadBtn');
+            const timerDisplay = document.getElementById('liveTimer');
 
-            const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&nologo=true&model=flux`;
-            img.src = url;
+            placeholder.style.display = 'none';
+            loading.style.display = 'block';
+            img.style.display = 'none';
+            dlBtn.style.display = 'none';
+
+            let seconds = 0;
+            timerDisplay.innerText = "0s";
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                seconds++;
+                timerDisplay.innerText = seconds + "s";
+            }, 1000);
+
+            const seed = Math.floor(Math.random() * 999999);
+            const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&seed=${seed}&nologo=true&model=flux`;
+
+            img.src = imageUrl;
             img.onload = () => {
                 clearInterval(timerInterval);
-                document.getElementById('loading').style.display = 'none';
-                img.style.display = 'block';
-                document.getElementById('downloadBtn').style.display = 'block';
+                loading.style.display = 'none';
+                if (img.naturalHeight === 1024) {
+                    img.style.display = 'block';
+                    dlBtn.style.display = 'block';
+                } else {
+                    handleError();
+                }
             };
+            img.onerror = () => { handleError(); };
+
+            function handleError() {
+                clearInterval(timerInterval);
+                loading.style.display = 'none';
+                img.src = serverDownImg;
+                img.style.display = 'block';
+                dlBtn.style.display = 'none';
+            }
         }
 
         async function processDownload() {
             const img = document.getElementById('generated-img');
-            const response = await fetch(img.src);
-            const blob = await response.blob();
-            const link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.download = `Lapapi_AI_${Date.now()}.png`;
-            link.click();
+            if (!img.src || img.src === serverDownImg) return alert("Generate image first!");
+            try {
+                const response = await fetch(img.src);
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `Lapapi_AI_${Date.now()}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } catch (e) {
+                window.open(img.src, '_blank');
+            }
         }
 
-        function openPage(t) {
-            let msg = t === 'privacy' ? "<h2>Privacy</h2><p>We use cookies and Google AdSense for ads.</p>" : "<h2>Info</h2><p>Contact: Bujjidora0000@gmail.com</p>";
-            document.getElementById('modalText').innerHTML = msg;
+        function openPage(type) {
+            let content = "";
+            if(type === 'about') {
+                content = "<h2>About Lapapi.AI</h2><p>We are a dedicated team of AI enthusiasts bringing the power of Flux AI to your fingertips. Our goal is to make digital art creation simple and free for everyone.</p>";
+            } else if(type === 'contact') {
+                content = "<h2>Contact Support</h2><p>For inquiries, reach us at:<br><strong>Bujjidora0000@gmail.com</strong></p>";
+            } else if(type === 'privacy') {
+                content = "<h2>Privacy Policy</h2><p>Your privacy matters. We do not store your prompts or generated images. This site uses cookies and third-party ads (Google AdSense) to keep the service free.</p>";
+            }
+            document.getElementById('modalText').innerHTML = content;
             document.getElementById('infoModal').style.display = 'block';
         }
+
         function closeModal() { document.getElementById('infoModal').style.display = 'none'; }
     </script>
 </body>
-</html>
+    </html>
+                
