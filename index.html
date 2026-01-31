@@ -223,7 +223,8 @@
             }, 1000);
 
             const seed = Math.floor(Math.random() * 999999);
-            const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&seed=${seed}&nologo=true&model=flux`;
+            // model changed to turbo as per request
+            const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1024&height=1024&seed=${seed}&nologo=true&model=turbo`;
 
             img.src = imageUrl;
             img.onload = () => {
@@ -281,5 +282,4 @@
         function closeModal() { document.getElementById('infoModal').style.display = 'none'; }
     </script>
 </body>
-    </html>
-                                                               
+</html>
