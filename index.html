@@ -67,15 +67,14 @@
             background: rgba(0,0,0,0.95); z-index: 6000; flex-direction: column; justify-content: center; align-items: center;
         }
 
-        /* Article Section Styles */
-        .article-section {
-            text-align: left; background: #111; padding: 25px; border-radius: 20px; 
-            margin-top: 30px; line-height: 1.6; border: 1px solid #333; margin-bottom: 30px;
+        /* Article Styles for AdSense */
+        .article-card {
+            background: #111; padding: 25px; border-radius: 20px; text-align: left;
+            margin-top: 30px; border: 1px solid #333; line-height: 1.6;
         }
-        .article-section h2 { color: #00ffcc; font-size: 1.5rem; margin-top: 0; }
-        .article-section h3 { color: #ff00cc; font-size: 1.2rem; }
-        .article-section p, .article-section li { color: #ccc; font-size: 14px; }
-        .prompt-example { background: #000; padding: 12px; border-left: 3px solid #ff00cc; margin: 10px 0; font-family: monospace; color: #00ffcc; font-size: 13px; }
+        .article-card h2 { color: #00ffcc; font-size: 1.4rem; }
+        .article-card h3 { color: #ff00cc; font-size: 1.1rem; }
+        .article-card p, .article-card li { color: #ccc; font-size: 14px; }
 
         footer { margin-top: 50px; padding: 20px; background: #111; font-size: 12px; color: #777; }
         .footer-links { margin-top: 10px; }
@@ -125,25 +124,16 @@
         <button id="downloadBtn" class="dl-btn" onclick="triggerAd('download')">📥 DOWNLOAD IMAGE (ADS)</button>
         <div class="ad-banner" style="margin-top:20px;">GOOGLE ADSENSE - BOTTOM</div>
 
-        <div class="article-section">
+        <div class="article-card">
             <h2>How to Use Lapapi.AI Magic Studio</h2>
-            <p>Lapapi.AI is an advanced AI image generation tool that allows you to create high-quality digital art for free. Whether you want to design wallpapers, social media posts, or creative concepts, our AI is here to help.</p>
-            
-            <h3>Easy Steps to Generate Art:</h3>
+            <p>Lapapi.AI is an innovative AI platform that helps you generate high-quality digital art from simple text descriptions. Follow these easy steps to get started:</p>
             <ul>
-                <li><b>Enter Details:</b> Type your imagination in the prompt box above.</li>
-                <li><b>Click Generate:</b> Our AI engine (Flux Model) will start creating your unique image.</li>
-                <li><b>Instant Download:</b> Once the magic is done, save it to your gallery instantly.</li>
+                <li><b>Input Prompt:</b> Type your creative idea in the box.</li>
+                <li><b>Generate:</b> Click the button to let our AI process your art.</li>
+                <li><b>Save:</b> Use the download button to save <b>Lapapi.AI</b> quality art to your device.</li>
             </ul>
-
-            <h3>Best Prompts for Best Results:</h3>
-            <p>To get professional-grade images, try using these descriptive prompt styles:</p>
-            
-            <div class="prompt-example">"Sovereign lion wearing a golden crown, 8k cinematic, highly detailed fur, dark background."</div>
-            <div class="prompt-example">"Futuristic Chennai city with flying cars, cyberpunk style, neon lights, rainy night."</div>
-            <div class="prompt-example">"A cute 3D animated robot holding a flower, Pixar style, soft lighting, vibrant colors."</div>
-
-            <p>Using keywords like <i>"Hyper-realistic", "4K", "Cinematic Lighting",</i> and <i>"Digital Art"</i> will significantly improve the quality of your results.</p>
+            <h3>Why Lapapi.AI?</h3>
+            <p>Our tool provides unlimited access to premium AI models, allowing everyone to become an artist. Whether you need a wallpaper or inspiration, Lapapi.AI is your go-to studio.</p>
         </div>
     </div>
 
@@ -228,14 +218,34 @@
             };
         }
 
-        function processDownload() {
+        // திருத்தப்பட்ட டவுன்லோட் பகுதி
+        async function processDownload() {
             const img = document.getElementById('generated-img');
-            const link = document.createElement('a');
-            link.href = img.src;
-            link.download = `Lapapi_AI_${Date.now()}.png`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            const imageUrl = img.src;
+
+            if (!imageUrl) return alert("Generate an image first!");
+
+            try {
+                const response = await fetch(imageUrl);
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                // இங்கே பெயரில் Lapapi.AI என்று வரும்
+                link.download = `Lapapi.AI_${Date.now()}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(url);
+            } catch (error) {
+                // மாற்று முறை (Fallback)
+                const link = document.createElement('a');
+                link.href = imageUrl;
+                link.target = "_blank";
+                link.download = `Lapapi.AI_${Date.now()}.png`;
+                link.click();
+            }
         }
 
         function openPage(type) {
@@ -256,4 +266,4 @@
     </script>
 </body>
     </html>
-            
+    
